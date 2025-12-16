@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет магазин PerfumeForYou</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-spray-can-sparkles me-2"></i>PerfumeForYou
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link active" href="#home">Главная</a>
+                    <a class="nav-link" href="#catalog">Каталог</a>
+                    <a class="nav-link position-relative" href="#" id="cartButton">
+                        <i class="fas fa-shopping-cart"></i> Корзина
+                        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+                            0
+                        </span>
+                    </a>
+                    <a class="nav-link" href="#contacts">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Заголовок -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <h1 class="text-center">PerfumeForYou</h1>
+            <p class="text-center">Изысканные ароматы для вас</p>
+        </div>
+    </section>
+
+    <!-- Фильтры -->
+    <section class="filters-section py-4">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Поиск по названию...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="categoryFilter">
+                        <option value="">Все категории</option>
+                        <option value="цветочный">Цветочные</option>
+                        <option value="сладкий">Сладкие</option>
+                        <option value="восточный">Восточные</option>
+                        <option value="свежий">Свежие</option>
+                        <option value="ночной">Ночные</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="priceFilter">
+                        <option value="">Все цены</option>
+                        <option value="0-15000">До 15 000 ₽</option>
+                        <option value="15000-25000">15 000 - 25 000 ₽</option>
+                        <option value="25000-100000">От 25 000 ₽</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-outline-danger w-100" id="resetFilters">
+                        <i class="fas fa-redo"></i> Сбросить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог товаров -->
+    <section class="catalog-section" id="catalog">
+        <div class="container">
+            <h2 class="text-center mb-4">Каталог ароматов</h2>
+            <div id="productsContainer" class="row">
+                <!-- Товары будут загружены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Корзина (модальное окно) -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="fas fa-shopping-cart me-2"></i>Ваша корзина</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems" class="mb-3">
+                        <!-- Товары в корзине будут здесь -->
+                        <p class="text-center text-muted" id="emptyCartMessage">Корзина пуста</p>
+                    </div>
+                    <div class="cart-summary border-top pt-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Количество товаров:</span>
+                            <span id="cartTotalItems">0</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold fs-5">
+                            <span>Итого:</span>
+                            <span id="cartTotalPrice">0 ₽</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-danger" id="clearCart">
+                        <i class="fas fa-trash"></i> Очистить корзину
+                    </button>
+                    <button class="btn btn-danger" id="checkoutBtn">
+                        <i class="fas fa-credit-card"></i> Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Контакты -->
+    <section id="contacts" class="contacts-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Контакты</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-phone me-2"></i>
+                        <strong>Телефон:</strong> +7 (908) 876-67-67
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-envelope me-2"></i>
+                        <strong>Email:</strong> perforu1@gmail.com
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-clock me-2"></i>
+                        <strong>Время работы:</strong> Пн-Пт 10:00 - 20:00
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <strong>Адрес:</strong> Москва, ул. Ароматная, д. 15
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p>2025 PerfumeForYou. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Наш скрипт -->
+    <script src="js/script.js"></script>
+</body>
+</html>
